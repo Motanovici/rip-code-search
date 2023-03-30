@@ -9,14 +9,15 @@ from sentence_transformers import util
 from semantic_code_search.embed import do_embed
 from semantic_code_search.prompt import ResultScreen
 
-
-def _search(query_embedding, corpus_embeddings, functions, k=5, file_extension=None):
-    # TODO: filtering by file extension
-    cos_scores = util.cos_sim(query_embedding, corpus_embeddings)[0]
-    top_results = torch.topk(cos_scores, k=min(k, len(cos_scores)), sorted=True)
-    out = []
-    for score, idx in zip(top_results[0], top_results[1]):
-        out.append((score, functions[idx]))
+# completed TODO and added filtering by extension
+def _search(query_embedding,corpus_embeddings,functions,k=5,file_extension=None):
+    cos_scores=util.cos_sim(query_embedding,corpus_embeddings)[0]
+    top_results=torch.topk(cos_scores,k=min(k,len(cos_scores)),sorted=True)
+    out=[]
+    for (score,idx) in zip(top_results[0],top_results[1]):
+        if file_extension is not None and not functions[idx].endswith(file_extension):
+            continue
+        out.append((score,functions[idx]))
     return out
 
 
@@ -46,7 +47,7 @@ def do_query(args, model):
         sys.exit(1)
 
     if not os.path.isfile(args.path_to_repo + '/' + '.embeddings'):
-        print('Embeddings not found in {}. Generating embeddings now.'.format(
+        print('Embeddings not found in {}. Generating  sem_rip embeddings now.'.format(
             args.path_to_repo))
         do_embed(args, model)
 

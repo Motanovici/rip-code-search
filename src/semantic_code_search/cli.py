@@ -45,7 +45,7 @@ def cluster_func(args):
 
 def main():
     parser = argparse.ArgumentParser(
-        prog='sem', description='Search your codebase using natural language')
+        prog='sem_rip', description='Search your codebase using natural language')
     parser.add_argument('-p', '--path-to-repo', metavar='PATH', default=git_root(), type=git_root, required=False,
                         help='Path to the root of the git repo to search or embed')
     parser.add_argument('-m', '--model-name-or-path', metavar='MODEL', default='krlvi/sentence-msmarco-bert-base-dot-v5-nlpl-code_search_net',

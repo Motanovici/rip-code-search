@@ -1,7 +1,7 @@
 import setuptools
 
-with open('README.md', 'r') as f:
-    long_description = f.read()
+#with open('README.md', 'r') as f:
+#    long_description = f.read()
 
 setuptools.setup(
     name='semantic-code-search',
@@ -20,7 +20,7 @@ setuptools.setup(
                 'tree_sitter_builds==2022.8.27',
                 'tree_sitter_languages==1.5.0',
     ],
-    long_description=long_description,
+    #long_description=long_description,
     long_description_content_type='text/markdown',
     python_requires='>=3.8',
     url='https://github.com/sturdy-dev/semantic-code-search',
@@ -29,7 +29,7 @@ setuptools.setup(
     },
     entry_points={
         'console_scripts': [
-            'sem=semantic_code_search.cli:main',
+            'sem_rip=semantic_code_search.cli:main',
         ]
     },
     keywords='semantic code search',
